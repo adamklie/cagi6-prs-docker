@@ -1,0 +1,20 @@
+# Run the following to generate the necessary sample data (100 individuals and 1000 SNPs)
+
+Run cells in Part 1 of sample-file-prep.ipynb notebook to generate MGB_100_1000.ped and MGB_100_1000.map files
+
+head -n 100 MGB.fam > MGB_100_1000.fam 
+
+shuf -n 1000 MGB.bim > MGB_100_1000.bim
+
+/cellar/users/mpagadal/Programs/plink --file MGB_100_1000 --make-bed --out MGB_100_1000
+
+/cellar/users/mpagadal/Programs/plink --bfile MGB_100_1000 --export A --out  MGB_100_1000
+
+Run cells in Part 2 of sample-file-prep.ipynb notebook to generate MGB_100_1000.feather file
+
+Run cells of Part 3 of sample-file-prep.ipynb notebook to generate MGB_100_1000.zscored.feather file
+
+Run cells in Part 4 of sample-file-prep.ipynb notebook to generate MGB_100_1000.tsv MGB_100_1000.ids.txt files
+
+Run cells in Part 5 to test SNPLoader.py on thes files
+

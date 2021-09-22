@@ -8,6 +8,11 @@ WORKDIR /app
 ADD . .
 
 # installing python libraries
-#RUN pip3 install -r python_requirements.txt
+RUN pip3 install -r python_requirements.txt
+
+#RUN wget https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20210606.zip
+#RUN unzip plink_linux_x86_64_20210606.zip
+
+RUN chmod -R 777 /app/data/dataloading
 
 CMD ["bash", "/app/main.sh"]
