@@ -1,5 +1,8 @@
-data/sample/MGB.*
-data/test/MGB_100_1000.*
+data/test/MGB_10_all/
+data/test/MGB_100_1000/
+data/val/
+output/test/
+output/val/
 LICENSE
 plink
 plink_linux_x86_64_20210606.zip

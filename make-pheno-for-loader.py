@@ -42,7 +42,7 @@ def main(args):
     
     #Step X: Save new data
     print("Saving tsv and ids.txt file to {}...".format(args.out))
-    fam.to_csv("{}.tsv".format(args.out), sep="\t")
+    fam.to_csv("{}.tsv".format(args.out), sep="\t", index=False)
     np.savetxt("{}.ids.txt".format(args.out), ids, fmt="%s")
     
     print("-"*len("Phenotype Loading"))
