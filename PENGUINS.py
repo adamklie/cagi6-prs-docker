@@ -36,10 +36,13 @@ if __name__ == "__main__":
     #print(sorted(penguins))
     
     print("Concatenating files ... in the meantime maybe go penguin sledding?!?")
-    
+
     blizzard = pd.DataFrame() #empty DF which predictions will get concatenated with 
     
     for ice in sorted(penguins):
+        if ice.split(".")[-1] != "tsv":
+            continue
+        print(ice)
         lapras = pd.read_csv(tempFilePath + ice, sep = "\t", index_col = 0)
         lapras = lapras.applymap(lambda x: x[1:-1]) #remove the annoying [] around each prediction probability
         lapras = lapras.astype(float) #convert to float from string
