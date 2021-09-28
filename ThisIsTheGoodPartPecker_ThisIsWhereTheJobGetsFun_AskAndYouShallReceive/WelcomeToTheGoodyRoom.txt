@@ -1,0 +1,12 @@
+Hey there are skittles in here!!!
+
+In this directory are:
+
+1) InSNPtionEverdeen.py: The updated model architecture which handles incorporation of clinical features as a penultimate layer concatenation. Note for BCA, numberAddOns will need to be set to 1 in instantiaion since zAge is the lone clinical factor included here. For the other 3 models, this param isn't needed (default is 2).
+2) SNPAndClinicalLoader.py: The updated dataloader which yields the classical InSNPtion features in addition to 2 clinical features - sex (encoded as 0 or 1) and z-scored age
+
+
+Other Scripts/files to come. 
+
+
+... A G5 airplane?!? Yes, and lots of money ... player (queue FloRida's Low).
