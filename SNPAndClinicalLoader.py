@@ -56,7 +56,15 @@ class SNPDataset(torch.utils.data.Dataset):
         self.fh = dict(zip(pheno['IID'], pheno['FH']))
         
         # Pull sex information from dataframe
-        self.sex = dict(zip(pheno['IID'], pheno['SEX']))
+        if set(pheno["SEX"]) != {0,1}:
+            newSex = pheno["SEX"].replace({2:0})
+            if set(newSex) == {0,1}:
+                print("Successfully recoding sex")
+                self.sex = dict(zip(pheno['IID'], newSex))
+            else:
+                raise ValueError("STATUS Values are not 0/1 and cannot be corrected. Fix sex representation.")
+        else:
+            self.sex = dict(zip(pheno['IID'], pheno['SEX']))
         
         # Pull Age information from the dataframe - z-scored age
         self.zage = dict(zip(pheno["IID"], pheno["Z_AGE"]))

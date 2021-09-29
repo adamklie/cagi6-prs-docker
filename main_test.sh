@@ -1,4 +1,4 @@
-#cd /app/
+cd /app/
 
 # Main pipeline for taking individual level genotypes in plink bfile format and outputting predictions
 echo -e 'Running CAGI6-PRS Docker Script\n'
@@ -26,10 +26,10 @@ python3 make-feather-for-loader.py --raw /input/test/MGB_10.t2d.raw --summary /i
 echo -e "\n"
 
 ### Step 4 - Dataload and make predictions
-python3 GilderoyLockhart.py --age_only True --model_path ./input/test/bca.TheMonkeygoesBCAc.pt --config_path ./input/test/bca.test.yaml --out_path ./output/test/ --disease BCA
-python3 GilderoyLockhart.py --model_path ./input/test/cad.ChuckAndDevon.pt --config_path ./input/test/cad.yaml --out_path ./output/test/ --disease CAD
-python3 GilderoyLockhart.py --model_path ./input/test/ibd.pt --config_path ./input/test/ibd.yaml --out_path ./output/test/ --disease IBD
-python3 GilderoyLockhart.py --model_path ./input/test/t2d.BillieEilishSaidItsNoT2Die.pt --config_path ./input/test/t2d.yaml --out_path ./output/test/ --disease T2D
+python3 GilderoyLockhart.py --age_only True --model_path /input/test/bca.TheMonkeygoesBCAc.pt --config_path /input/test/bca.test.yaml --out_path /output/test/ --disease BCA
+python3 GilderoyLockhart.py --model_path /input/test/cad.ChuckAndDevon.pt --config_path /input/test/cad.yaml --out_path /output/test/ --disease CAD
+python3 GilderoyLockhart.py --model_path /input/test/ibd.pt --config_path /input/test/ibd.yaml --out_path /output/test/ --disease IBD
+python3 GilderoyLockhart.py --model_path /input/test/t2d.BillieEilishSaidItsNoT2Die.pt --config_path /input/test/t2d.yaml --out_path /output/test/ --disease T2D
 
 python3 PENGUINS.py --inter_milan /output/test/ --out_path /output/test/
 
