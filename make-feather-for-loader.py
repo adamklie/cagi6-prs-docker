@@ -35,9 +35,10 @@ def main(args):
     IIDs = raw["IID"]
     raw = raw.iloc[:, 6:].T
     raw.columns = IIDs
-    raw.index.name = "0"
     snps = ["_".join(var.split("_")[:-1]) for var in raw.index]
+    raw.index.name = "0"
     alleles = [var[-1] for var in raw.index]
+    raw.index = snps
     raw_summary = pd.DataFrame({"INDEX":raw.index, "MGB_ID":snps, "ACTUAL_ALLELE":alleles})
     
     #Step 2: Load summary file for SNPs
@@ -46,18 +47,24 @@ def main(args):
     
     #Step 3: Combine these files
     print("Merging raw with SNP summary file...")
-    merged_summary = pd.merge(raw_summary, summary, on="MGB_ID").set_index("INDEX")
-    ordered_merged_summary = merged_summary.loc[raw.index]
+    merged_summary = pd.merge(summary, raw_summary, on="MGB_ID").set_index("INDEX")
+    
+    #Step 4: Clean and order raw
+    dups = merged_summary[merged_summary["MGB_ID"].duplicated()]
+    add_on = pd.DataFrame(index=dups["MGB_ID"], columns=raw.columns, data=np.repeat(dups["MEAN"].values.reshape(len(dups),1), raw.shape[1], axis=1))
+    raw = pd.concat([raw, add_on])
+    ordered_raw = raw.loc[merged_summary["MGB_ID"].drop_duplicates()]
     
     #Step 4: Correcting mismatched alleles, TODO: put number corrected
     print("Correcting mismatched alleles...")
-    mismatched_pos = np.where(ordered_merged_summary["ACTUAL_ALLELE"] != ordered_merged_summary["EXPECTED_ALLELE"])[0]
-    raw.iloc[mismatched_pos, :] = 2 - raw.iloc[mismatched_pos, :]
-    
+    mismatched_pos = np.where(merged_summary["ACTUAL_ALLELE"] != merged_summary["EXPECTED_ALLELE"])[0]
+    ordered_raw.iloc[mismatched_pos, :] = 2 - ordered_raw.iloc[mismatched_pos, :]
+
     #Step5 Z-score
     print("Z-scoring genotypes...")
-    zraw = raw.subtract(ordered_merged_summary["MEAN"].values, axis="index")
-    zraw = zraw.div(ordered_merged_summary["STD"].values, axis="index")
+    zraw = ordered_raw.subtract(merged_summary["MEAN"].values, axis="index")
+    zraw = zraw.div(merged_summary["STD"].values, axis="index")
+    zraw.index.name = "0"
     
     #Step 6: Save new zscored feather
     print("Saving zscored feather file to {}.zscored.feather...".format(args.out))

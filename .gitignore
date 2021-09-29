@@ -1,7 +1,7 @@
 input/MGB.*
-input/test/MGB_10_all/
-input/test/MGB_100_1000/
-output/test/
+input/test/*.pt
+output/test/MGB_* 
+archive/
 LICENSE
 plink
 plink_linux_x86_64_20210606.zip
