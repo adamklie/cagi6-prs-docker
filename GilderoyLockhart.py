@@ -124,7 +124,7 @@ def DoTheThing(modelPath, config, fileOutputPath, ageOnly, condition):
     else:
         shallWeBegin = DoubleDash([generalSpecs["batchSize"],mtlParams["inputDimension"]],mtlParams["numLayers"], mtlParams["layerWidths"], mtlParams["dropout"], mtlParams["multiTaskOutputs"], generalSpecs["activationFunction"])
     
-    shallWeBegin.load_state_dict(torch.load(modelPath, map_location=torch.device('cpu')))
+    shallWeBegin.load_state_dict(torch.load(modelPath, map_location=pleaseBeGpu))
     shallWeBegin.to(pleaseBeGpu)
     
     geno_file = dataLoaderParams.get("SNP_Path")
