@@ -30,9 +30,9 @@ Multitask-FFN:
     weights: {"PC":[0.25, 0.75], "Ethnicity":[0.3,0.3,0.2,0.2], "FH":[0.69, 0.31]} #How much to weight each class per loss function when weightedLoss above == True
     
 Dataloader:
-    SNP_Path: ./input/MGB.bca.zscored.feather
-    TestIDs: ./input/MGB.ids.txt
-    PhenotypeFile: ./input/MGB.bca.tsv
+    SNP_Path: /input/MGB.bca.zscored.feather
+    TestIDs: /input/MGB.ids.txt
+    PhenotypeFile: /input/MGB.bca.tsv
     Disease: PHENOTYPE
     
 #Run Command: python ClinicalTestPredictionsAndAUC.py --age_only True --config_path /cellar/users/jtalwar/projects/BetterRiskScores/InSNPtion/Galbatorix/DeweyIsOutOfTheGAGI/Configs/SingleTask/TestSets/ClinicalInclusion/Test_BCA.yaml --model_path /cellar/users/jtalwar/projects/BetterRiskScores/InSNPtion/Galbatorix/DeweyIsOutOfTheGAGI/Models/SingleTask/ClinicalInclusion/BCA/Optuna_Study_Trial_18_Epoch_12.pt

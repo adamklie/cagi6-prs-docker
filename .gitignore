@@ -1,7 +1,4 @@
-input/MGB.*
-input/*.pt
-input/test/*.pt
-input/test/MGB_*
+models/
 archive/
 LICENSE
 plink

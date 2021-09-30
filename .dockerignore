@@ -1,3 +1,5 @@
-input/test/*.pt
-output/test/
 archive/
+input/
+output/
+README.md
+__pycache__

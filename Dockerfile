@@ -23,8 +23,8 @@ RUN wget https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20210606.zip
 RUN unzip plink_linux_x86_64_20210606.zip
 
 # making dirs readable and writeable
-RUN chmod -R 777 /app/input/
-RUN chmod -R 777 /app/output/
+RUN chmod -R 777 /app/ref/
+RUN chmod -R 777 /app/models/
 
 # run the script inside the docker
 CMD ["bash", "/app/main.sh"]
