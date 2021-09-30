@@ -27,4 +27,4 @@ RUN chmod -R 777 /app/input/
 RUN chmod -R 777 /app/output/
 
 # run the script inside the docker
-CMD ["bash", "/app/main_test.sh"]
+CMD ["bash", "/app/main.sh"]
